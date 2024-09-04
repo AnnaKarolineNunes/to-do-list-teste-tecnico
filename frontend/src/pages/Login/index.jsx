@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom"
-import { useRef } from "react"
-import api from "../../services/api"
+import { Link,useNavigate  } from "react-router-dom";
+import { useRef} from "react";
+import api from "../../services/api.js";
 
 function Login() {
     const emailRef = useRef()  // Referência para o campo de email
@@ -25,7 +25,8 @@ function Login() {
     }
 
     return (
-        <div >
+        <div className="max-w-md mx-auto mt-10 bg p-8 border border-gray-300 rounded-lg shadow-lg items-center">
+             <img src="/logo-taskly.png" alt="logo" className="pb-10 pt-20" />
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
                 Login
             </h2>
@@ -33,23 +34,22 @@ function Login() {
                 <input ref={emailRef}
                     placeholder="Email"
                     type="email"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
+                   className="w-full p-3 border bg-gray-100 border-gray-100 rounded-lg focus: outline-none"
                 />
                 <input ref={passwordRef}
                     placeholder="Senha"
                     type="password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
+                   className="w-full p-3 border bg-gray-100 border-gray-100 rounded-lg focus: outline-none"
                 />
-                <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-400">
+                <button className="w-full h-14 bg-gradient-to-r from-blue-400 from-0% via-blue-500 via-36% to-indigo-600 to-66% to-violet-400 to-99% text-white font-medium py-3 rounded-lg hover:bg-blue-600 transition-colors">
                     Login
                 </button>
             </form>
-            <Link to="/" className="text-blue-700 hover:underline mt-4 block text-center">
+            <Link to="/"className="mt-4 font-medium text-black   hover:underline">
                 Não tem uma conta? Cadastre-se
             </Link>
             {/* Link para redirecionar ao cadastro */}
         </div>
     )
 }
-
-export default Login  // Exporta o componente para ser usado em outros lugares
+export default Login; // Exporta o componente para ser usado em outros lugares
