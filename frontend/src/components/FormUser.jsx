@@ -1,4 +1,4 @@
-import ButtonSubmit from "./buttonSubmit";
+
 import { useRef} from "react";
 import api from "../services/api";
 import { Link } from "react-router-dom";
@@ -23,11 +23,13 @@ function formUser() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
-            <h2 className="text-2xl font-medium mb-4 text-center">cadastre-se</h2>
+        <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4 font-poppins">
+            <h2 className="text-3xl font-medium mb-4 text-center">cadastre-se</h2>
             <input ref={emailRef} placeholder="Email" className="w-full p-3 border bg-gray-100 border-gray-100 rounded-lg focus: outline-none" />
             <input ref={passwordRef} type="password" placeholder="Senha" className="w-full p-3 border bg-gray-100 border-gray-100 rounded-lg focus: outline-none" />
-            <ButtonSubmit />
+            <button type="submit" className=" font-poppins w-full h-14 bg-gradient-to-r from-blue-400 from-0% via-blue-500 via-36% to-indigo-600 to-66% to-violet-400 to-80% text-white font-medium py-3 rounded-lg hover:bg-blue-600 transition-colors">
+        cadastrar
+    </button>
         </form>
 
     )
