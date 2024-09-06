@@ -2,23 +2,21 @@ import { useState, useEffect } from "react";
 import api from "../../services/api.js";
 import SideBar from "../../components/SideBar.jsx";
 import BarradePesquisa from "../../components/BarraDePesquisa.jsx";
-import ButtonAddTarefa from "../../components/ButtonAddTarefa.jsx";
-import AddTaskModal from "../../components/AddTaskModal.jsx";
-import EditTaskModal from "../../components/EditTaskModal.jsx";
 import TaskRow from "../../components/TaskRow.jsx";
+import EditTaskModal from "../../components/EditTaskModal.jsx";
 
-function Tarefas() {
+function TarefasConcluidas() {
     const [tasks, setTasks] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [taskToEdit, setTaskToEdit] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
 
+    // Limpa a mensagem de erro após 3 segundos
     const clearErrorMessage = () => {
         setTimeout(() => {
             setErrorMessage(null);
-        }, 3000); // Limpa a mensagem de erro após 3 segundos
+        }, 3000);
     };
 
     const handleError = (error) => {
@@ -30,10 +28,11 @@ function Tarefas() {
             setErrorMessage("Ocorreu um erro. Tente novamente.");
         }
         console.error("Erro:", error);
-        clearErrorMessage(); // Limpa a mensagem após um tempo
+        clearErrorMessage();
     };
 
-    const fetchTasks = async () => {
+    // Busca as tarefas concluídas
+    const fetchCompletedTasks = async () => {
         try {
             const token = localStorage.getItem('token');
             const response = await api.get('/tarefas', {
@@ -41,21 +40,22 @@ function Tarefas() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setTasks(response.data);
+            const completedTasks = response.data.filter(task => task.completed);
+            setTasks(completedTasks);
         } catch (error) {
             handleError(error);
         }
     };
 
-    const addNewTask = async (newTask) => {
+    const deleteTask = async (taskId) => {
         try {
             const token = localStorage.getItem('token');
-            await api.post('/tarefas', newTask, {
+            await api.delete(`/tarefas/${taskId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            fetchTasks();
+            fetchCompletedTasks(); // Atualiza a lista após a exclusão
         } catch (error) {
             handleError(error);
         }
@@ -72,26 +72,13 @@ function Tarefas() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            fetchTasks();
+            fetchCompletedTasks(); // Atualiza a lista após a edição
         } catch (error) {
             handleError(error);
         }
     };
 
-    const deleteTask = async (taskId) => {
-        try {
-            const token = localStorage.getItem('token');
-            await api.delete(`/tarefas/${taskId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            fetchTasks();
-        } catch (error) {
-            handleError(error);
-        }
-    };
-
+    // Alterna o estado de "completo" da tarefa
     const toggleCompleteTask = async (task) => {
         try {
             const token = localStorage.getItem('token');
@@ -100,7 +87,7 @@ function Tarefas() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            fetchTasks();
+            fetchCompletedTasks(); // Atualiza a lista após alterar o estado
         } catch (error) {
             handleError(error);
         }
@@ -112,15 +99,12 @@ function Tarefas() {
     };
 
     useEffect(() => {
-        fetchTasks();
+        fetchCompletedTasks();
     }, []);
 
-    const filteredTasks = tasks
-        .filter(task =>
-            task.title.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        // Ordena para que as tarefas pendentes apareçam primeiro
-        .sort((a, b) => a.completed - b.completed);
+    const filteredTasks = tasks.filter(task =>
+        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <div className="bg-[#F6F7F9] min-h-screen flex font-poppins">
@@ -136,10 +120,7 @@ function Tarefas() {
                 )}
 
                 <div className="flex items-center pl-10 pt-10">
-                    <h2 className="text-2xl font-medium">Tarefas</h2>
-                </div>
-                <div className="pl-10 pt-4 pr-10">
-                    <ButtonAddTarefa onClick={() => setShowAddModal(true)} />
+                    <h2 className="text-2xl font-medium">Tarefas Concluídas</h2>
                 </div>
                 <div className="pl-10 pr-10 pt-5">
                     <table className="table-auto w-full">
@@ -162,21 +143,16 @@ function Tarefas() {
                                 <TaskRow
                                     key={task.id}
                                     task={task}
-                                    onToggleComplete={toggleCompleteTask}
-                                    onEdit={() => handleEditTask(task)}
-                                    onDelete={deleteTask}
+                                    onToggleComplete={() => toggleCompleteTask(task)} // Alterna o estado da tarefa
+                                    onEdit={() => handleEditTask(task)} // Abre o modal de edição
+                                    onDelete={() => deleteTask(task.id)} // Deleta a tarefa
                                 />
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-            {showAddModal && (
-                <AddTaskModal
-                    onClose={() => setShowAddModal(false)}
-                    onSave={addNewTask}
-                />
-            )}
+
             {showEditModal && taskToEdit && (
                 <EditTaskModal
                     task={taskToEdit}
@@ -189,4 +165,4 @@ function Tarefas() {
     );
 }
 
-export default Tarefas;
+export default TarefasConcluidas;

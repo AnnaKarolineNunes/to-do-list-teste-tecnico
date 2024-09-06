@@ -3,8 +3,8 @@ function ButtonAddTarefa({ onClick }) {
     return (
         <button 
             onClick={onClick}
-            className='flex items-center rounded-2xl font-medium shadow p-2 bg-gray-100 hover:bg-gray-200'
-            style={{ fontSize: "14px" }}
+            className='flex items-center rounded-lg w-full font-medium shadow p-2   bg-[#EFF0F3] hover:bg-gray-200'
+            style={{ fontSize: "14px"  }}
         > 
             <img 
                 src="./icon-add.png" 

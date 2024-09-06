@@ -17,7 +17,7 @@ function Login() {
             })
             localStorage.setItem('token', token)  // Armazena o token recebido no localStorage
 
-            navigate('/listar-usuarios')  // Redireciona para a página de lista de usuários
+            navigate('/Tarefas')  // Redireciona para a página de lista de usuários
 
         } catch (err) {
             alert('Senha ou email incorretos')  // Exibe um alerta se o login falhar
@@ -50,7 +50,7 @@ function Login() {
             </form>
             <div className="flex items-center  justify-center space-x-2">
                 <p className="font-medium pt-4">Não tem uma conta?</p>
-                <Link to="/" className="font-medium pt-4 text-blue-700 hover:underline">
+                <Link to="/Tarefas" className="font-medium pt-4 text-blue-700 hover:underline">
                     Cadastre-se
                 </Link>
             </div>

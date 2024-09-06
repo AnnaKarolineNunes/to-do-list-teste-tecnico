@@ -25,7 +25,7 @@ function Cadastro() {
                 <FormUser />
                 <div className="flex items-center justify-center space-x-2">
                     <p className="font-medium pt-4">Já tem uma conta?</p>
-                    <Link to="/" className="font-medium pt-4 text-blue-700 hover:underline">
+                    <Link to="/Login" className="font-medium pt-4 text-blue-700 hover:underline">
                         Vá para o login
                     </Link>
                 </div>
