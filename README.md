@@ -1,6 +1,11 @@
 # Taskly - Sistema de Gerenciamento de Tarefas
 
 O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplicação web full-stack. Ele permite que usuários registrem, editem, excluam e organizem suas tarefas em um formato intuitivo de calendário e lista. A aplicação é dividida em backend e frontend, utilizando tecnologias modernas para fornecer uma experiência eficiente e fácil de usar.
+## Capturas de Tela
+
+![Tela Cadastro](/frontend/public/assets/Telas/TelaTarefaslGeral.png)
+
+### Confira essa e outras telas do sistema nesse [link](/frontend/public/assets/Telas/) 
 
 ## Funcionalidades
 
@@ -138,8 +143,6 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
 - **PUT /tarefas/**:  Editar uma tarefa existente.
 - **PATCH /tarefas/completar**: Alterar o status de uma tarefa (completa/incompleta).
 - **DELETE /tarefas/** Deletar uma tarefa.
-
-## Capturas de Tela
 
 
 ## Licença
