@@ -27,7 +27,7 @@ function Login() {
     return (
         <div className="font-poppins max-w-md mx-auto mt-10 bg p-8 border border-gray-200 rounded-lg shadow-lg ">
             <div className="items-center">
-                <img src="/logo-taskly.png" alt="logo" className="pb-10 pt-8 pl-20 " />
+                <img src="/assets/logo-taskly.png" alt="logo" className="pb-10 pt-8 pl-20 " />
                 <h2 className="text-3xl font-medium mb-6 text-center text-gray-700 pb-5">
                     Login
                 </h2>
@@ -50,7 +50,7 @@ function Login() {
             </form>
             <div className="flex items-center  justify-center space-x-2">
                 <p className="font-medium pt-4">Não tem uma conta?</p>
-                <Link to="/Tarefas" className="font-medium pt-4 text-blue-700 hover:underline">
+                <Link to="/Cadastro" className="font-medium pt-4 text-blue-700 hover:underline">
                     Cadastre-se
                 </Link>
             </div>

@@ -4,15 +4,15 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import api from "../../services/api";
 import SideBar from "../../components/SideBar.jsx";
-import EditTaskModal from "../../components/EditTaskModal.jsx"; // Importar o modal de edição
+import EditTaskModal from "../../components/EditTaskModal.jsx";
 
 // Configuração do localizador de datas do calendário
 const localizer = momentLocalizer(moment);
 
 function TarefasCalendario() {
   const [tasks, setTasks] = useState([]);
-  const [selectedTask, setSelectedTask] = useState(null); // Estado para armazenar a tarefa selecionada
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+  const [selectedTask, setSelectedTask] = useState(null); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchTasks();
@@ -32,29 +32,26 @@ function TarefasCalendario() {
     }
   };
 
-  // Mapeando as tarefas para os eventos do calendário
   const events = tasks.map((task) => ({
-    id: task.id, // Armazenar o ID da tarefa para edição
+    id: task.id,
     title: task.title,
-    start: new Date(task.createdAt), // Usando a data de criação
-    end: new Date(task.createdAt), // Para simplificar, o início e o fim são no mesmo dia
-    allDay: true,
+    start: new Date(task.startDate || task.createdAt),  // Use o campo correto para a data de início
+    end: new Date(task.endDate || task.createdAt),      // Use o campo correto para a data de término
+    allDay: false,                                     // Defina como false para horários específicos
+    status: task.status,
   }));
 
-  // Função para abrir o modal com a tarefa selecionada
   const handleSelectEvent = (event) => {
     const task = tasks.find((task) => task.id === event.id);
     setSelectedTask(task);
-    setIsModalOpen(true); // Abrir o modal
+    setIsModalOpen(true);
   };
 
-  // Função para fechar o modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedTask(null);
   };
 
-  // Função para salvar a edição
   const handleSaveEdit = async (updatedTask) => {
     try {
       const token = localStorage.getItem("token");
@@ -63,7 +60,6 @@ function TarefasCalendario() {
           Authorization: `Bearer ${token}`,
         },
       });
-      // Atualizar a lista de tarefas localmente
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === updatedTask.id ? updatedTask : task
@@ -75,23 +71,51 @@ function TarefasCalendario() {
     }
   };
 
+  const eventStyleGetter = (event) => {
+    let backgroundColor = "#6062FA"; 
+
+    if (event.status === "completed") {
+      backgroundColor = "#10B981";
+    } else if (event.status === "overdue") {
+      backgroundColor = "#EF4444";
+    }
+
+    return {
+      style: {
+        backgroundColor,
+        color: "white",
+        borderRadius: "0.5rem",
+        padding: "0.5rem",
+      },
+    };
+  };
+
   return (
-    <div className="bg-[#F6F7F9] min-h-screen flex font-poppins">
+    <div className="bg-gray-100 min-h-screen flex font-poppins">
       <SideBar />
-      <div className="flex-1 relative p-10">
+      <div className="flex-1 p-10">
         <h2 className="text-2xl font-medium mb-4">Tarefas no Calendário</h2>
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 500 }}
-          views={["month", "week", "day"]}
-          onSelectEvent={handleSelectEvent} // Permitir seleção de evento
-        />
+        <div className="bg-white shadow rounded-lg p-4">
+          <Calendar
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 600 }}
+            views={["month", "week", "day"]}
+            onSelectEvent={handleSelectEvent}
+            eventPropGetter={eventStyleGetter}
+            className="custom-calendar"
+          />
+          <style jsx>{`
+            .custom-calendar .rbc-today {
+              background-color: transparent;
+              color: inherit;
+            }
+          `}</style>
+        </div>
       </div>
 
-      {/* Modal de Edição */}
       {isModalOpen && (
         <EditTaskModal
           task={selectedTask}

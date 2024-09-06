@@ -5,6 +5,7 @@ import auth from '../middlewares/auth.js'  // Importando o middleware de autenti
 const router = express.Router()
 const prisma = new PrismaClient()
 
+/*
 router.get('/listar-usuarios', async (req, res) => {  // Define uma rota GET para listar usuários.
 
     try {
@@ -16,15 +17,15 @@ router.get('/listar-usuarios', async (req, res) => {  // Define uma rota GET par
         res.status(500).json({ message: 'Falha no servidor' })  // Retorna uma resposta de erro com status 500 (erro no servidor).
     }
 })
-
+*/
 
 // Listar todas as tarefas do usuário autenticado
 router.get('/tarefas', auth, async (req, res) => {
   try {
     const tarefas = await prisma.task.findMany({
-      where: { 
-        userId: req.userId 
-     }
+      where: {
+        userId: req.userId
+      }
     })
     res.status(200).json(tarefas)
   } catch (err) {
@@ -35,79 +36,88 @@ router.get('/tarefas', auth, async (req, res) => {
 
 // Adicionar nova tarefa
 router.post('/tarefas', auth, async (req, res) => {
-  const { titulo, descricao } = req.body
+  const { title, description, createdAt } = req.body; // Recebe o campo `createdAt` com data e hora completos
   try {
     const novaTarefa = await prisma.task.create({
       data: {
-        title: titulo,
-        description: descricao,
-        userId: req.userId
-      }
-    })
-    res.status(201).json(novaTarefa)
+        title,
+        description,
+        userId: req.userId,
+        createdAt: createdAt ? new Date(createdAt) : new Date(),  // Usa a data completa com hora se fornecida
+      },
+    });
+
+    res.status(201).json(novaTarefa);
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ message: 'Erro ao adicionar tarefa' })
+    console.error(err);
+    res.status(500).json({ message: 'Erro ao adicionar tarefa' });
   }
-})
+});
+
 
 // Marcar tarefa como concluída
-router.patch('/tarefas/:id/concluir', auth, async (req, res) => {
-  const { id } = req.params
+router.patch('/tarefas/:id/completar', auth, async (req, res) => {
+  const { id } = req.params;
+  const { completed } = req.body; // Recebe o novo valor de "completed" no corpo da requisição
   try {
     const tarefaAtualizada = await prisma.task.updateMany({
-      where: { 
-        id: id, 
-        userId: req.userId  // Garante que o usuário só pode atualizar suas próprias tarefas
-      },
-      data: { completed: true }
-    })
+      where: { id: id, userId: req.userId },
+      data: { completed }
+    });
     if (tarefaAtualizada.count === 0) {
-      return res.status(404).json({ message: 'Tarefa não encontrada ou não pertence ao usuário' })
+      return res.status(404).json({ message: 'Tarefa não encontrada ou não pertence ao usuário' });
     }
-    res.status(200).json({ message: 'Tarefa marcada como concluída' })
+    res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ message: 'Erro ao concluir tarefa' })
+    console.error(err);
+    res.status(500).json({ message: 'Erro ao atualizar tarefa' });
   }
 })
 
-// Editar título e descrição de uma tarefa
+
+// Editar título, descrição e data de criação de uma tarefa
 router.put('/tarefas/:id', auth, async (req, res) => {
-  const { id } = req.params
-  const { titulo, descricao } = req.body
+  const { id } = req.params;
+  const { title, description, createdAt } = req.body; // Recebe também o campo `createdAt`
+
   try {
     const tarefaAtualizada = await prisma.task.updateMany({
-      where: { 
-        id: id, 
+      where: {
+        id: id,
         userId: req.userId  // Garante que o usuário só pode atualizar suas próprias tarefas
       },
-      data: { title: titulo, description: descricao }
-    })
+      data: {
+        title,
+        description,
+        createdAt: createdAt ? new Date(createdAt) : undefined,  // Atualiza a data de criação se for fornecida
+      }
+    });
+
     if (tarefaAtualizada.count === 0) {
-      return res.status(404).json({ message: 'Tarefa não encontrada ou não pertence ao usuário' })
+      return res.status(404).json({ message: 'Tarefa não encontrada ou não pertence ao usuário' });
     }
-    res.status(200).json({ message: 'Tarefa atualizada com sucesso' })
+
+    res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ message: 'Erro ao editar tarefa' })
+    console.error(err);
+    res.status(500).json({ message: 'Erro ao editar tarefa' });
   }
-})
+});
 
 // Excluir uma tarefa
 router.delete('/tarefas/:id', auth, async (req, res) => {
   const { id } = req.params
   try {
     const tarefaDeletada = await prisma.task.deleteMany({
-      where: { 
-        id: id, 
+      where: {
+        id: id,
         userId: req.userId  // Garante que o usuário só pode deletar suas próprias tarefas
       }
     })
     if (tarefaDeletada.count === 0) {
       return res.status(404).json({ message: 'Tarefa não encontrada ou não pertence ao usuário' })
     }
-    res.status(204).json({message: 'tarefa excluída com sucesso' })
+    res.status(204).json({ message: 'tarefa excluída com sucesso' })
   } catch (err) {
     console.error(err)
     res.status(500).json({ message: 'Erro ao excluir tarefa' })

@@ -10,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Cadastro />} /> {/* Rota para a página de cadastro */}
+        <Route path="/Cadastro" element={<Cadastro />} /> {/* Rota para a página de cadastro */}
         <Route path="/login" element={<Login />} /> {/* Rota para a página de login */}
         <Route path="/Tarefas" element={<Tarefas />} /> 
         <Route path="/Pendentes" element={<TarefasPendentes />} /> 

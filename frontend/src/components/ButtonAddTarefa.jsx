@@ -7,7 +7,7 @@ function ButtonAddTarefa({ onClick }) {
             style={{ fontSize: "14px"  }}
         > 
             <img 
-                src="./icon-add.png" 
+                src="/assets/icon-add.png" 
                 alt="Add" 
                 className="w-4 h-4 mr-2"
             />
