@@ -64,19 +64,25 @@ function TarefasConcluidas() {
     const editTask = async (updatedTask) => {
         try {
             const token = localStorage.getItem('token');
-            await api.put(`/tarefas/${updatedTask.id}`, {
-                title: updatedTask.title,
-                description: updatedTask.description,
-            }, {
+            const response = await api.put(`/tarefas/${updatedTask.id}`, updatedTask, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            fetchCompletedTasks(); // Atualiza a lista após a edição
+    
+            // Atualiza a tarefa no estado após a resposta do backend
+            setTasks((prevTasks) =>
+                prevTasks.map((task) =>
+                    task.id === updatedTask.id ? { ...updatedTask, ...response.data } : task
+                )
+            );
+    
+            console.log("Tarefa atualizada no backend", response.data);
         } catch (error) {
-            handleError(error);
+            console.error("Erro ao atualizar a tarefa", error);
         }
     };
+    
 
     // Alterna o estado de "completo" da tarefa
     const toggleCompleteTask = async (task) => {

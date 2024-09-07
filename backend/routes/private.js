@@ -5,20 +5,6 @@ import auth from '../middlewares/auth.js'  // Importando o middleware de autenti
 const router = express.Router()
 const prisma = new PrismaClient()
 
-/*
-router.get('/listar-usuarios', async (req, res) => {  // Define uma rota GET para listar usuários.
-
-    try {
-        const users = await prisma.user.findMany()  // Consulta o banco de dados para obter todos os usuários.
-
-        res.status(200).json({ message: 'Usuarios listados com sucesso', users })  // Retorna os usuários em formato JSON com status 200 (sucesso).
-    } catch (err) {
-        console.log(err)  // Loga o erro no console para depuração.
-        res.status(500).json({ message: 'Falha no servidor' })  // Retorna uma resposta de erro com status 500 (erro no servidor).
-    }
-})
-*/
-
 // Listar todas as tarefas do usuário autenticado
 router.get('/tarefas', auth, async (req, res) => {
   try {
@@ -78,31 +64,32 @@ router.patch('/tarefas/:id/completar', auth, async (req, res) => {
 // Editar título, descrição e data de criação de uma tarefa
 router.put('/tarefas/:id', auth, async (req, res) => {
   const { id } = req.params;
-  const { title, description, createdAt } = req.body; // Recebe também o campo `createdAt`
+  const { title, description, createdAt } = req.body;
 
   try {
-    const tarefaAtualizada = await prisma.task.updateMany({
+    const tarefaAtualizada = await prisma.task.update({
       where: {
         id: id,
-        userId: req.userId  // Garante que o usuário só pode atualizar suas próprias tarefas
+        userId: req.userId
       },
       data: {
         title,
         description,
-        createdAt: createdAt ? new Date(createdAt) : undefined,  // Atualiza a data de criação se for fornecida
+        createdAt: createdAt ? new Date(createdAt) : undefined,
       }
     });
 
-    if (tarefaAtualizada.count === 0) {
+    if (!tarefaAtualizada) {
       return res.status(404).json({ message: 'Tarefa não encontrada ou não pertence ao usuário' });
     }
 
-    res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
+    res.status(200).json(tarefaAtualizada); // Retorna a tarefa atualizada
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Erro ao editar tarefa' });
   }
 });
+
 
 // Excluir uma tarefa
 router.delete('/tarefas/:id', auth, async (req, res) => {
