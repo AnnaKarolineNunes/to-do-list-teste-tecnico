@@ -14,7 +14,7 @@ CREATE TABLE `Task` (
     `title` VARCHAR(255) NOT NULL,
     `description` TEXT NOT NULL,
     `completed` BOOLEAN NOT NULL DEFAULT false,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAt` DATETIME(3) NOT NULL ,
     `updatedAt` DATETIME(3) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
 
