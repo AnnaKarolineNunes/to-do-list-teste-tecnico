@@ -38,10 +38,10 @@ function TaskRow({ task, onToggleComplete, onEdit, onDelete }) {
             </td>
             <td className="px-6 py-6 whitespace-nowrap text-right text-sm font-medium">
                 <button onClick={() => onDelete(task.id)}>
-                    <img src="/assets/lixeira.png" alt="Deletar Tarefa" className="w-5 h-5 inline" />
+                    <img src="/frontend/assets/lixeira.png" alt="Deletar Tarefa" className="w-5 h-5 inline" />
                 </button>
                 <button onClick={() => onEdit(task)} className="ml-4">
-                    <img src="/assets/more-info.png" alt="Opções" className="w-5 h-5 inline" />
+                    <img src="/frontend/assets/more-info.png" alt="Opções" className="w-5 h-5 inline" />
                 </button>
             </td>
         </tr>
