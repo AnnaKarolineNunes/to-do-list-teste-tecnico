@@ -9,24 +9,26 @@ function EditTaskModal({ task, onClose, onSave, onDelete }) {
         if (task) {
             setTitle(task.title || ''); // Atualiza o título
             setDescription(task.description || ''); // Atualiza a descrição
-            setCreatedAt(task.createdAt ? new Date(task.createdAt).toISOString().slice(0, 16) : ''); // Formata a data corretamente para datetime-local
+            // Verifica se a data está em formato UTC e ajusta para o fuso horário correto.
+            if (task.createdAt) {
+                const localDate = new Date(task.createdAt);
+                const offset = localDate.getTimezoneOffset() * 60000; // Ajusta o fuso horário local
+                const adjustedDate = new Date(localDate.getTime() - offset);
+                setCreatedAt(adjustedDate.toISOString().slice(0, 16)); // Converte para o formato datetime-local
+            } else {
+                setCreatedAt('');
+            }
         }
     }, [task]);
+    
 
     const handleSave = () => {
         if (title && description && createdAt) {
-            // Converte a data/hora local para UTC
-            const localDateTime = new Date(createdAt);
-            const offset = localDateTime.getTimezoneOffset(); // Diferença do fuso horário em minutos
-            const adjustedDateTime = new Date(localDateTime.getTime() - offset * 60000).toISOString();
-    
-            console.log("Data e hora ajustadas para UTC:", adjustedDateTime); // Verificar a data ajustada
-    
             const updatedTask = {
                 ...task,
                 title,
                 description,
-                createdAt: adjustedDateTime, // Passa a data ajustada
+                createdAt: createdAt, // Mantém a data local sem converter para UTC
             };
     
             console.log("Tarefa atualizada enviada para o backend:", updatedTask);
@@ -37,7 +39,6 @@ function EditTaskModal({ task, onClose, onSave, onDelete }) {
             alert("Preencha todos os campos");
         }
     };
-    
 
     const handleDelete = () => {
         if (window.confirm("Tem certeza que deseja excluir esta tarefa?")) {
