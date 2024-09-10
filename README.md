@@ -33,6 +33,7 @@ O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplica�
 - **React Router**: Navegação entre as páginas da aplicação.
 - **React Big Calendar**: Componente de calendário integrado à aplicação.
 - **Tailwind CSS**: Framework CSS para estilização responsiva.
+- **Figma**: As telas do projeto foram desenvolvidas no figma. [Clique aqui](https://www.figma.com/design/nRI1UukQYC5V9CT9oTmbbn/Taskly?node-id=0-1&t=NzKTQ6IQPlMzgDit-1`) para acessar. 
 
 ## Banco de Dados:
 - **MySQL** : Banco de dados relacional utilizado com Prisma ORM.
@@ -55,9 +56,8 @@ O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplica�
 
 Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
 
-- Node.js: [Instale aqui](https://nodejs.org/en/download/prebuilt-installer)
 - npm ou yarn: Gerenciador de pacotes.
-- MySQL: Para o banco de dados.
+
 
 ## Instalação:
 
