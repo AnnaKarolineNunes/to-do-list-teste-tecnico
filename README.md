@@ -63,7 +63,7 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
 
 ### Backend
 
-O repositorio está hospedado no [Railway](https://railway.app/) . Portanto, nao é necessário configurar o ambiente do backend. Tanto o servidor quanto o banco de dados estão hospedados no Railway. 
+O repositório está hospedado no Railway, o que elimina a necessidade de configurar o ambiente do backend manualmente. Tanto o servidor quanto o banco de dados já estão configurados e hospedados na plataforma Railway.
 
 ## Frontend:
 
