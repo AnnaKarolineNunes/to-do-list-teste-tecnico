@@ -88,8 +88,6 @@ O repositório está hospedado no Railway, o que elimina a necessidade de config
 
 ### Backend:
 
-- O backend estará disponível em http://localhost:3000.
-
 - Utilize o Prisma Studio para visualizar e gerenciar o banco de dados de forma gráfica.
 
     ```bash
@@ -97,7 +95,7 @@ O repositório está hospedado no Railway, o que elimina a necessidade de config
     ```
 ### Frontend:
 
-- Acesse a interface web em http://localhost:5173.
+- Acesse a interface web em **http://localhost:5173**.
 - Faça login ou cadastre-se para começar a gerenciar suas tarefas.
 
 ## Rotas da API:
