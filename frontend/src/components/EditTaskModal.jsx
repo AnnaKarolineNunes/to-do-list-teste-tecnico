@@ -9,18 +9,18 @@ function EditTaskModal({ task, onClose, onSave, onDelete }) {
         if (task) {
             setTitle(task.title || ''); // Atualiza o título
             setDescription(task.description || ''); // Atualiza a descrição
-            // Verifica se a data está em formato UTC e ajusta para o fuso horário correto.
             if (task.createdAt) {
+                // Converte a data UTC para o formato local (sem alterar o fuso)
                 const localDate = new Date(task.createdAt);
-                const offset = localDate.getTimezoneOffset() * 60000; // Ajusta o fuso horário local
-                const adjustedDate = new Date(localDate.getTime() - offset);
-                setCreatedAt(adjustedDate.toISOString().slice(0, 16)); // Converte para o formato datetime-local
+                const isoDateTimeLocal = new Date(localDate.getTime() - localDate.getTimezoneOffset() * 60000)
+                    .toISOString()
+                    .slice(0, 16);
+                setCreatedAt(isoDateTimeLocal); // Ajusta a data para exibição no campo datetime-local
             } else {
                 setCreatedAt('');
             }
         }
     }, [task]);
-    
 
     const handleSave = () => {
         if (title && description && createdAt) {
@@ -28,11 +28,11 @@ function EditTaskModal({ task, onClose, onSave, onDelete }) {
                 ...task,
                 title,
                 description,
-                createdAt: createdAt, // Mantém a data local sem converter para UTC
+                createdAt: new Date(createdAt).toISOString(), // Salva a data em UTC para o backend
             };
-    
+
             console.log("Tarefa atualizada enviada para o backend:", updatedTask);
-    
+
             onSave(updatedTask); // Salva as alterações
             onClose(); // Fecha o modal
         } else {

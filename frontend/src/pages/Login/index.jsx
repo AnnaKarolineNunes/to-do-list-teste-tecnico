@@ -8,19 +8,23 @@ function Login() {
     const navigate = useNavigate()  // Hook para navegação programática
 
     async function handleSubmit(event) {
-        event.preventDefault()  // Previne o comportamento padrão de recarregar a página
-
+        event.preventDefault();
+    
         try {
-            const { data: token } = await api.post('/login', {  // Envia a requisição de login para a API
+            const { data: token } = await api.post('/login', {
                 email: emailRef.current.value,
                 password: passwordRef.current.value
-            })
-            localStorage.setItem('token', token)  // Armazena o token recebido no localStorage
-
-            navigate('/Tarefas')  // Redireciona para a página de lista de usuários
-
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+    
+            localStorage.setItem('token', token);
+            navigate('/Tarefas');
+    
         } catch (err) {
-            alert('Senha ou email incorretos')  // Exibe um alerta se o login falhar
+            alert('Senha ou email incorretos');
         }
     }
 
