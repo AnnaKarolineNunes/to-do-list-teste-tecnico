@@ -9,7 +9,7 @@ function Cadastro() {
                 <div className="text-left">
                     <div className="flex justify-center items-center">
                         {/* Atualize o caminho da imagem para o correto */}
-                        <img src="/frontend/assets/img-cadastro.png" alt="Organize suas tarefas" className=" max-w-full h-auto mb-4 " />
+                        <img src="/assets/img-cadastro.png" alt="Organize suas tarefas" className=" max-w-full h-auto mb-4 " />
                     </div>
                     <h2 className="pl-8 text-2xl font-medium mb-4"
                      style={{ fontSize: "28px" }}>Organize suas tarefas, simplifique sua vida!</h2>
@@ -21,7 +21,7 @@ function Cadastro() {
 
             {/* Lado Direito com o Formulário */}
             <div className="w-1/2 flex flex-col items-center bg-white p-8">
-                <img src="/frontend/assets/logo-taskly.png" alt="logo" className="pb-10 pt-20" />
+                <img src="/assets/logo-taskly.png" alt="logo" className="pb-10 pt-20" />
                 <FormUser />
                 <div className="flex items-center justify-center space-x-2">
                     <p className="font-medium pt-4">Já tem uma conta?</p>

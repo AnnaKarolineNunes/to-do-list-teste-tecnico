@@ -18,7 +18,7 @@ const SideBar = () => {
           } bg-[#6062FA] h-screen p-5 pt-8 relative duration-300`}
       >
         <img
-          src="/frontend/assets/control.png"
+          src="/assets/control.png"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-indigo-700
            border-2 rounded-full ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
@@ -26,14 +26,14 @@ const SideBar = () => {
         <div className="flex gap-x-4 items-center">
           <Link to="/Tarefas">
             <img
-              src="/frontend/assets/logo-icon.png"
+              src="/assets/logo-icon.png"
               className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`}
             />
           </Link>
           {open && (
             <Link to="/Tarefas">
               <img
-                src="/frontend/assets/logo-branca.png"
+                src="/assets/logo-branca.png"
                 className="cursor-pointer"
                 alt="Logo Taskly"
               />
@@ -49,7 +49,7 @@ const SideBar = () => {
             >
               <Link to={Menu.route} className="flex items-center w-full">
                 <img
-                  src={`/frontend/assets/${Menu.src}.png`}
+                  src={`/assets/${Menu.src}.png`}
                   className="h-6 w-6 mr-4" // Tamanho fixo para os ícones
                 />
                 <span className={`${!open && "hidden"} origin-left duration-200`}>
