@@ -63,36 +63,7 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
 
 ### Backend
 
-1. Clone o repositório:
-
-    ```bash
-    git clone https://github.com/seu-usuario/taskly.git
-    cd taskly/backend
-    ```
-
-
-2. Instale as dependências:
-
-    ```bash
-    npm install
-    ```
-3. Defina as variáveis de ambiente no arquivo .env :
-
-    ```bash
-    DATABASE_URL="mysql://usuario:senha@localhost:3306/nome_do_banco"
-    JWT_SECRET="sua_chave_secreta"
-    ```
-4. Rode as migrações do Prisma para configurar o banco de dados:
-
-    ```bash
-    npx prisma migrate dev
-    ```
-
-5. Inicie o servidor backend::
-
-    ```bash
-    node --watch server.js
-    ```
+O repositorio está hospedado no [Railway](https://railway.app/) . Portanto, nao é necessário configurar o ambiente do backend. Tanto o servidor quanto o banco de dados estão hospedados no Railway. 
 
 ## Frontend:
 
