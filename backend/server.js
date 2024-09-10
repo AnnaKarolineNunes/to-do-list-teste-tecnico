@@ -6,8 +6,11 @@ import corsMiddleware from './middlewares/cors.js';  // Importa o CORS para perm
 
 
 const app = express()  // Cria uma instância do Express para gerenciar o servidor e as rotas.
+
 app.use(express.json())  // Configura o servidor para interpretar requisições com corpo em formato JSON.
 app.use(corsMiddleware);
+
+
 
 app.use('/', publicRoutes)  // Define as rotas públicas, que não exigem autenticação.
 app.use('/', auth, privateRoutes)  // Define as rotas privadas, que exigem autenticação através do middleware 'auth'.
