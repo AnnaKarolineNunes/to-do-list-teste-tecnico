@@ -33,6 +33,7 @@ O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplica�
 - **React Router**: Navegação entre as páginas da aplicação.
 - **React Big Calendar**: Componente de calendário integrado à aplicação.
 - **Tailwind CSS**: Framework CSS para estilização responsiva.
+- **Figma**: As telas do projeto foram desenvolvidas no figma. [Clique aqui](https://www.figma.com/design/nRI1UukQYC5V9CT9oTmbbn/Taskly?node-id=0-1&t=NzKTQ6IQPlMzgDit-1`) para acessar. 
 
 ## Banco de Dados:
 - **MySQL** : Banco de dados relacional utilizado com Prisma ORM.
@@ -55,15 +56,14 @@ O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplica�
 
 Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
 
-- Node.js: [Instale aqui](https://nodejs.org/en/download/prebuilt-installer)
 - npm ou yarn: Gerenciador de pacotes.
-- MySQL: Para o banco de dados.
+
 
 ## Instalação:
 
 ### Backend
 
-O repositorio está hospedado no [Railway](https://railway.app/) . Portanto, nao é necessário configurar o ambiente do backend. Tanto o servidor quanto o banco de dados estão hospedados no Railway. 
+O repositório está hospedado no Railway, o que elimina a necessidade de configurar o ambiente do backend manualmente. Tanto o servidor quanto o banco de dados já estão configurados e hospedados na plataforma Railway.
 
 ## Frontend:
 
@@ -88,8 +88,6 @@ O repositorio está hospedado no [Railway](https://railway.app/) . Portanto, nao
 
 ### Backend:
 
-- O backend estará disponível em http://localhost:3000.
-
 - Utilize o Prisma Studio para visualizar e gerenciar o banco de dados de forma gráfica.
 
     ```bash
@@ -97,7 +95,7 @@ O repositorio está hospedado no [Railway](https://railway.app/) . Portanto, nao
     ```
 ### Frontend:
 
-- Acesse a interface web em http://localhost:5173.
+- Acesse a interface web em **http://localhost:5173**.
 - Faça login ou cadastre-se para começar a gerenciar suas tarefas.
 
 ## Rotas da API:
