@@ -1,6 +1,8 @@
 # Taskly - Sistema de Gerenciamento de Tarefas
 
 O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplicação web full-stack. Ele permite que usuários registrem, editem, excluam e organizem suas tarefas em um formato intuitivo de calendário e lista. A aplicação é dividida em backend e frontend, utilizando tecnologias modernas para fornecer uma experiência eficiente e fácil de usar.
+### [Clique aqui ](https://taskly-gerenciador.netlify.app/) para visitar o site da Taskly . 
+
 ## Capturas de Tela
 
 ![Tela Cadastro](/frontend/public/assets/Telas/TelaTarefaslGeral.png)
@@ -52,51 +54,15 @@ O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplica�
 - **src/services/api.js** : Configuração da API para fazer requisições HTTP ao backend.
 - **src/components/** : Componentes reutilizáveis como barra de pesquisa, modais de adição/edição de tarefas, etc.
 
-## Pré-requisitos
-
-Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
-
-- npm ou yarn: Gerenciador de pacotes.
-
-
-## Instalação:
+## Deploy:
 
 ### Backend
 
-O repositório está hospedado no Railway, o que elimina a necessidade de configurar o ambiente do backend manualmente. Tanto o servidor quanto o banco de dados já estão configurados e hospedados na plataforma Railway.
+O repositório está hospedado no [Railway](https://railway.app/) , o que elimina a necessidade de configurar o ambiente do backend manualmente. Tanto o servidor quanto o banco de dados já estão configurados e hospedados na plataforma Railway.
 
 ## Frontend:
 
-1. Navegue até a pasta frontend:
-
-    ```bash
-    cd ../frontend
-    ```
-
-2. Instale as dependências:
-
-    ```bash
-    npm install
-    ```
-3. Inicie o servidor frontend:
-
-    ```bash
-    npm run dev
-    ```
-
-## Como Usar:
-
-### Backend:
-
-- Utilize o Prisma Studio para visualizar e gerenciar o banco de dados de forma gráfica.
-
-    ```bash
-    npx prisma studio
-    ```
-### Frontend:
-
-- Acesse a interface web em **http://localhost:5173**.
-- Faça login ou cadastre-se para começar a gerenciar suas tarefas.
+O repositório está hospedado no [Netlify](https://www.netlify.com/) , o que elimina a necessidade de configurar o ambiente do frontend manualmente. Clique [aqui](https://taskly-gerenciador.netlify.app/) para entrar no site . 
 
 ## Rotas da API:
 
