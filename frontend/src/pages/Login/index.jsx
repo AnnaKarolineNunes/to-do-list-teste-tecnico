@@ -54,7 +54,7 @@ function Login() {
             </form>
             <div className="flex items-center  justify-center space-x-2">
                 <p className="font-medium pt-4">Não tem uma conta?</p>
-                <Link to="/Cadastro" className="font-medium pt-4 text-blue-700 hover:underline">
+                <Link to="/" className="font-medium pt-4 text-blue-700 hover:underline">
                     Cadastre-se
                 </Link>
             </div>

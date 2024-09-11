@@ -1,0 +1,9 @@
+[build]
+  command = "CI='' npm run build"
+  publish = "/dist"
+  base ="/"
+
+[[redirects]]
+  from = "/to-do-list-teste-tecnico/frontend/*"
+  to = "/to-do-list-teste-tecnico/frontend/index.html"
+  status = 200
