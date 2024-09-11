@@ -5,8 +5,6 @@ O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplica�
 
 ### Para acessar o repositório do frontend da aplicação, [clique aqui](https://github.com/AnnaKarolineNunes/taskly-frontend) .
 
-### Confira essa e outras telas do sistema nesse [link](/frontend/public/assets/Telas/) 
-
 ## Funcionalidades
 
 - **Cadastro de Usuários** : Usuários podem se registrar com email e senha.
