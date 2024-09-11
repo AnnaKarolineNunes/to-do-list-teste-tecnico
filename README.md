@@ -60,7 +60,7 @@ O Taskly é um sistema de gerenciamento de tarefas desenvolvido como uma aplica�
 
 O repositório está hospedado no [Railway](https://railway.app/) , o que elimina a necessidade de configurar o ambiente do backend manualmente. Tanto o servidor quanto o banco de dados já estão configurados e hospedados na plataforma Railway.
 
-## Frontend:
+### Frontend:
 
 O repositório está hospedado no [Netlify](https://www.netlify.com/) , o que elimina a necessidade de configurar o ambiente do frontend manualmente. Clique [aqui](https://taskly-gerenciador.netlify.app/) para entrar no site . 
 
