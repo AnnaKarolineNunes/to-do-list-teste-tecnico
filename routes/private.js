@@ -29,7 +29,7 @@ router.post('/tarefas', auth, async (req, res) => {
         title,
         description,
         userId: req.userId,
-        createdAt: createdAt ? new Date(createdAt) : new Date(),  // Usa a data completa com hora se fornecida
+        createdAt: createdAt || new Date(),  // Usa a data enviada diretamente
       },
     });
 
@@ -39,7 +39,6 @@ router.post('/tarefas', auth, async (req, res) => {
     res.status(500).json({ message: 'Erro ao adicionar tarefa' });
   }
 });
-
 
 // Marcar tarefa como concluída
 router.patch('/tarefas/:id/completar', auth, async (req, res) => {
