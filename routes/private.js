@@ -22,22 +22,14 @@ router.get('/tarefas', auth, async (req, res) => {
 
 // Adicionar nova tarefa
 router.post('/tarefas', auth, async (req, res) => {
-  const { title, description, createdAt } = req.body; // Recebe o campo `createdAt` com data e hora completos
-  
-  // Validação de campos obrigatórios
-  if (!title || !description) {
-    return res.status(400).json({ message: 'Título e descrição são obrigatórios' });
-  }
-
+  const { title, description, createdAt } = req.body; // Recebe o campo createdAt com data e hora completos
   try {
-    console.log(req.body); // Loga os dados recebidos antes de enviar a resposta
-
     const novaTarefa = await prisma.task.create({
       data: {
         title,
         description,
-        userId: req.userId, // Garante que o ID do usuário logado seja utilizado
-        createdAt: createdAt || new Date(),  // Usa a data enviada ou a data atual
+        userId: req.userId,
+        createdAt: createdAt ? new Date(createdAt) : new Date(),  // Usa a data completa com hora se fornecida
       },
     });
 
@@ -47,6 +39,7 @@ router.post('/tarefas', auth, async (req, res) => {
     res.status(500).json({ message: 'Erro ao adicionar tarefa', error: err.message });
   }
 });
+
 
 
 // Marcar tarefa como concluída
