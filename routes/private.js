@@ -20,16 +20,16 @@ router.get('/tarefas', auth, async (req, res) => {
   }
 })
 
-// Adicionar nova tarefa
 router.post('/tarefas', auth, async (req, res) => {
-  const { title, description, createdAt } = req.body; // Recebe o campo createdAt com data e hora completos
+  const { title, description, createdAt } = req.body;
+  console.log("Data recebida pelo backend:", createdAt);  // Verifique a data
   try {
     const novaTarefa = await prisma.task.create({
       data: {
         title,
         description,
         userId: req.userId,
-        createdAt: createdAt ? new Date(createdAt) : new Date(),  // Usa a data completa com hora se fornecida
+        createdAt: createdAt ? new Date(createdAt) : new Date(), 
       },
     });
 
@@ -39,6 +39,7 @@ router.post('/tarefas', auth, async (req, res) => {
     res.status(500).json({ message: 'Erro ao adicionar tarefa', error: err.message });
   }
 });
+
 
 
 
